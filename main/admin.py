@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import LoginLevel, UserLogin
+from .models import LoginLevel, UserLogin, Selecao
 
 
 class detDefault(admin.ModelAdmin):
@@ -11,3 +11,4 @@ class detDefault(admin.ModelAdmin):
 
 admin.site.register(LoginLevel, detDefault)
 admin.site.register(UserLogin, detDefault)
+admin.site.register(Selecao, detDefault)

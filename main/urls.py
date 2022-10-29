@@ -8,5 +8,8 @@ urlpatterns = [
     path("userLogin/", UserLoginAPIView.as_view(), name='userLogin'),
     path('userLogin/<int:pk>/', UserLoginAPIView.as_view(), name='userLoginParameters'),
 
+    path("selecao/", SelecaoAPIView.as_view(), name='selecao'),
+    path('selecao/<int:pk>/', SelecaoAPIView.as_view(), name='selecaoParameters'),
+
 ]
 

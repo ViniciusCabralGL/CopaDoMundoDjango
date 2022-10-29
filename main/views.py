@@ -78,3 +78,38 @@ class UserLoginAPIView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+
+
+class SelecaoAPIView(APIView):
+    def get(self, request, pk=''):
+        if 'user' in request.GET:
+            userID = request.GET['user']
+            user = Selecao.objects.filter(idUserFK=userID)
+            serializer = SelecaoSerializer(user, many=True)
+            return Response(serializer.data)
+        elif pk == '':
+            dados = Selecao.objects.all()
+            serializer = SelecaoSerializer(dados, many=True)
+            return Response(serializer.data)
+        else:
+            dados = Selecao.objects.get(id=pk)
+            serializer = SelecaoSerializer(dados)
+            return Response(serializer.data)
+
+    def put(self, request, pk=''):
+        dados = Selecao.objects.get(id=pk)
+        serializer = SelecaoSerializer(dados, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def delete(self, request, pk=''):
+        dados = Selecao.objects.get(id=pk)
+        dados.delete()
+        return Response({"msg": "Apagado com sucesso"})
+
+    def post(self, request):
+        serializer = SelecaoSerializer(data=request.data, many=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
