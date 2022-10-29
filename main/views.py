@@ -82,12 +82,7 @@ class UserLoginAPIView(APIView):
 
 class SelecaoAPIView(APIView):
     def get(self, request, pk=''):
-        if 'user' in request.GET:
-            userID = request.GET['user']
-            user = Selecao.objects.filter(idUserFK=userID)
-            serializer = SelecaoSerializer(user, many=True)
-            return Response(serializer.data)
-        elif pk == '':
+        if pk == '':
             dados = Selecao.objects.all()
             serializer = SelecaoSerializer(dados, many=True)
             return Response(serializer.data)
@@ -110,6 +105,71 @@ class SelecaoAPIView(APIView):
 
     def post(self, request):
         serializer = SelecaoSerializer(data=request.data, many=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
+class TipoInfracaoAPIView(APIView):
+    def get(self, request, pk=''):
+        if pk == '':
+            dados = TipoInfracao.objects.all()
+            serializer = TipoInfracaoSerializer(dados, many=True)
+            return Response(serializer.data)
+        else:
+            dados = TipoInfracao.objects.get(id=pk)
+            serializer = TipoInfracaoSerializer(dados)
+            return Response(serializer.data)
+
+    def put(self, request, pk=''):
+        dados = TipoInfracao.objects.get(id=pk)
+        serializer = TipoInfracaoSerializer(dados, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def delete(self, request, pk=''):
+        dados = TipoInfracao.objects.get(id=pk)
+        dados.delete()
+        return Response({"msg": "Apagado com sucesso"})
+
+    def post(self, request):
+        serializer = TipoInfracaoSerializer(data=request.data, many=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
+class InfracaoAPIView(APIView):
+    def get(self, request, pk=''):
+        if 'user' in request.GET:
+            userID = request.GET['user']
+            user = Infracao.objects.filter(idUserFK=userID)
+            serializer = InfracaoSerializer(user, many=True)
+            return Response(serializer.data)
+        elif pk == '':
+            dados = Infracao.objects.all()
+            serializer = InfracaoSerializer(dados, many=True)
+            return Response(serializer.data)
+        else:
+            dados = Infracao.objects.get(id=pk)
+            serializer = InfracaoSerializer(dados)
+            return Response(serializer.data)
+
+    def put(self, request, pk=''):
+        dados = Infracao.objects.get(id=pk)
+        serializer = InfracaoSerializer(dados, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def delete(self, request, pk=''):
+        dados = Infracao.objects.get(id=pk)
+        dados.delete()
+        return Response({"msg": "Apagado com sucesso"})
+
+    def post(self, request):
+        serializer = InfracaoSerializer(data=request.data, many=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)

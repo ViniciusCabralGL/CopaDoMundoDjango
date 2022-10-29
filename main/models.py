@@ -36,14 +36,30 @@ class UserLogin(models.Model):
 
 class Selecao(models.Model):
     # Team
-    class Suit(models.IntegerChoices):
+    class Quantidade(models.IntegerChoices):
         OPTION1 = 23
         OPTION2 = 24
         OPTION3 = 25
         OPTION4 = 26
 
     nome = models.CharField(max_length=255, blank=False, null=False)
-    qtdJogadores = models.IntegerField(choices=Suit.choices)
+    qtdJogadores = models.IntegerField(choices=Quantidade.choices)
 
     def __str__(self):
         return self.nome
+
+
+class TipoInfracao(models.Model):
+    descricao = models.CharField(max_length=255, blank=False, null=False)
+
+    def __str__(self):
+        return self.descricao
+
+
+class Infracao(models.Model):
+    tipoInfracao = models.ForeignKey(TipoInfracao, related_name="tipoInfracao", on_delete=models.CASCADE, blank=False, null=False)
+    selecao = models.ForeignKey(Selecao, related_name="selecao", on_delete=models.CASCADE, blank=False, null=False)
+    data = models.DateTimeField(default=datetime.datetime.now())
+
+    def __str__(self):
+        return f'{self.selecao} - {self.tipoInfracao} : {self.data}'

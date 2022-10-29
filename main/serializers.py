@@ -31,11 +31,16 @@ class SelecaoSerializer(serializers.ModelSerializer):
         model = Selecao
         fields = '__all__'
 
-'''
-class UsuariosGETSerializer(serializers.ModelSerializer):
-    idAssinaturaFK = AssinaturaSerializer(read_only=True)
+
+class TipoInfracaoSerializer(serializers.ModelSerializer):
     class Meta:
         many = True
-        model = Usuarios
+        model = TipoInfracao
         fields = '__all__'
-'''
+
+
+class InfracaoSerializer(serializers.ModelSerializer):
+    class Meta:
+        many = True
+        model = Infracao
+        fields = '__all__'
