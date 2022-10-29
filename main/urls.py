@@ -11,10 +11,16 @@ urlpatterns = [
     path("selecao/", SelecaoAPIView.as_view(), name='selecao'),
     path('selecao/<int:pk>/', SelecaoAPIView.as_view(), name='selecaoParameters'),
 
-    path("tipoInfracaoAPIView/", TipoInfracaoAPIView.as_view(), name='tipoInfracaoAPIView'),
-    path('tipoInfracaoAPIView/<int:pk>/', TipoInfracaoAPIView.as_view(), name='tipoInfracaoAPIViewParameters'),
+    path("tipoInfracao/", TipoInfracaoAPIView.as_view(), name='tipoInfracaoAPIView'),
+    path('tipoInfracao/<int:pk>/', TipoInfracaoAPIView.as_view(), name='tipoInfracaoAPIViewParameters'),
 
     path("infracao/", InfracaoAPIView.as_view(), name='infracao'),
     path('infracao/<int:pk>/', InfracaoAPIView.as_view(), name='infracaoParameters'),
+
+    path("tipoJogo/", TipoJogoAPIView.as_view(), name='tipoJogoAPIView'),
+    path('tipoJogo/<int:pk>/', TipoJogoAPIView.as_view(), name='tipoJogoAPIViewParameters'),
+
+    path("jogo/", JogoAPIView.as_view(), name='Jogo'),
+    path('jogo/<int:pk>/', JogoAPIView.as_view(), name='JogoParameters'),
 ]
 

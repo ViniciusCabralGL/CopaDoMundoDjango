@@ -44,3 +44,18 @@ class InfracaoSerializer(serializers.ModelSerializer):
         many = True
         model = Infracao
         fields = '__all__'
+
+
+class TipoJogoSerializer(serializers.ModelSerializer):
+    class Meta:
+        many = True
+        model = TipoJogo
+        fields = '__all__'
+
+
+class JogoSerializer(serializers.ModelSerializer):
+    class Meta:
+        many = True
+        model = Jogo
+        fields = '__all__'
+

@@ -1,0 +1,48 @@
+[
+    {
+      "http://localhost:8000/": {
+        "loginLevel/": {
+          "description": "Route to manager the level of the acess to the internal login"
+        },
+        "loginLevel/<int:pk>/": {
+          "description": "Route to manage a especific item of the route above"
+        },
+        "userLogin/": {
+          "description": "Route to manager the internal login"
+        },
+        "userLogin/<int:pk>/": {
+          "description": "Route to manage a especific item of the route above"
+        },
+        "selecao/": {
+          "description": "Route to manager the teams that will plat the WorldCup"
+        },
+        "selecao/<int:pk>/": {
+          "description": "Route to manage a especific item of the route above"
+        },
+        "tipoInfracao/": {
+          "description": "Route to manager the types of the infractons that can be applied to the teams"
+        },
+        "tipoInfracao/<int:pk>/": {
+          "description": "Route to manage a especific item of the route above"
+        },   
+        "infracao/": {
+          "description": "Route to manager to register the infraction of the teams"
+        },
+        "infracao/<int:pk>/": {
+          "description": "Route to manage a especific item of the route above"
+        },
+        "tipoJogo/": {
+          "description": "Route to manage the type of the match"
+        },
+        "tipoJogo/<int:pk>/": {
+          "description": "Route to manage a especific item of the route above"
+        },
+        "jogo/": {
+          "description": "Route to manage the match of the WC"
+        },
+        "jogo/<int:pk>/": {
+          "description": "Route to manage a especific item of the route above"
+        }
+     }
+    }
+  ]

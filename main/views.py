@@ -142,12 +142,7 @@ class TipoInfracaoAPIView(APIView):
 
 class InfracaoAPIView(APIView):
     def get(self, request, pk=''):
-        if 'user' in request.GET:
-            userID = request.GET['user']
-            user = Infracao.objects.filter(idUserFK=userID)
-            serializer = InfracaoSerializer(user, many=True)
-            return Response(serializer.data)
-        elif pk == '':
+        if pk == '':
             dados = Infracao.objects.all()
             serializer = InfracaoSerializer(dados, many=True)
             return Response(serializer.data)
@@ -170,6 +165,66 @@ class InfracaoAPIView(APIView):
 
     def post(self, request):
         serializer = InfracaoSerializer(data=request.data, many=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
+class TipoJogoAPIView(APIView):
+    def get(self, request, pk=''):
+        if pk == '':
+            dados = TipoJogo.objects.all()
+            serializer = TipoJogoSerializer(dados, many=True)
+            return Response(serializer.data)
+        else:
+            dados = TipoJogo.objects.get(id=pk)
+            serializer = TipoJogoSerializer(dados)
+            return Response(serializer.data)
+
+    def put(self, request, pk=''):
+        dados = TipoJogo.objects.get(id=pk)
+        serializer = TipoJogoSerializer(dados, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def delete(self, request, pk=''):
+        dados = TipoJogo.objects.get(id=pk)
+        dados.delete()
+        return Response({"msg": "Apagado com sucesso"})
+
+    def post(self, request):
+        serializer = TipoJogoSerializer(data=request.data, many=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
+class JogoAPIView(APIView):
+    def get(self, request, pk=''):
+        if pk == '':
+            dados = Jogo.objects.all()
+            serializer = JogoSerializer(dados, many=True)
+            return Response(serializer.data)
+        else:
+            dados = Jogo.objects.get(id=pk)
+            serializer = JogoSerializer(dados)
+            return Response(serializer.data)
+
+    def put(self, request, pk=''):
+        dados = Jogo.objects.get(id=pk)
+        serializer = JogoSerializer(dados, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def delete(self, request, pk=''):
+        dados = Jogo.objects.get(id=pk)
+        dados.delete()
+        return Response({"msg": "Apagado com sucesso"})
+
+    def post(self, request):
+        serializer = JogoSerializer(data=request.data, many=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)

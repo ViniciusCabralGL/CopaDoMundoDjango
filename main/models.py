@@ -59,7 +59,25 @@ class TipoInfracao(models.Model):
 class Infracao(models.Model):
     tipoInfracao = models.ForeignKey(TipoInfracao, related_name="tipoInfracao", on_delete=models.CASCADE, blank=False, null=False)
     selecao = models.ForeignKey(Selecao, related_name="selecao", on_delete=models.CASCADE, blank=False, null=False)
-    data = models.DateTimeField(default=datetime.datetime.now())
+    data = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     def __str__(self):
         return f'{self.selecao} - {self.tipoInfracao} : {self.data}'
+
+
+class TipoJogo(models.Model):
+    descricao = models.CharField(max_length=255, blank=False, null=False)
+
+    def __str__(self):
+        return self.descricao
+
+
+class Jogo(models.Model):
+    tipoJogo = models.ForeignKey(TipoJogo, related_name="tipoJogo", on_delete=models.CASCADE, blank=False, null=False)
+    timeA = models.ForeignKey(Selecao, related_name="selecaoA", on_delete=models.CASCADE, blank=False, null=False)
+    timeB = models.ForeignKey(Selecao, related_name="selecaoB", on_delete=models.CASCADE, blank=False, null=False)
+    arbitro = models.CharField(max_length=255, blank=False, null=False)
+    duracaoPartida = models.TimeField(auto_now=False, auto_now_add=False)
+
+    def __str__(self):
+        return self.descricao
